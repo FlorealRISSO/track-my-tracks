@@ -28,16 +28,16 @@ This repository contains the Docker setup to run the entire app, including the f
 ## Screenshots
 
 - **Login Page**:
-  ![Login Page](./track-my-tracks-frontend/readme-assets/login.png)
+  ![Login Page](./readme-assets/login.png)
 
 - **Home Page**:
-  ![Home Page](./track-my-tracks-frontend/readme-assets/home.png)
+  ![Home Page](./readme-assets/home.png)
 
 - **Admin Page**:
-  ![Admin Page](./track-my-tracks-frontend/readme-assets/admin1.png)
+  ![Admin Page](./readme-assets/admin1.png)
 
 - **Settings Page**:
-  ![Settings Page](./track-my-tracks-frontend/readme-assets/settings.png)
+  ![Settings Page](./readme-assets/settings.png)
 
 ## Key Features
 
