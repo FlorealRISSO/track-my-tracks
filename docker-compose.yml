@@ -1,0 +1,75 @@
+version: '3.8'
+services:
+
+  frontend:
+    depends_on:
+      - backend 
+    build:
+      context: track-my-tracks-frontend
+      dockerfile: Dockerfile
+      args:
+      - BACKEND_URL=http://localhost:3000
+      - FRONTEND_URL=http://localhost:8080
+    ports:
+      - "8080:8080"
+    volumes:
+      - './track-my-tracks-frontend:/build'
+
+  backend:
+    depends_on:
+      - db
+    build:
+      context: track-my-tracks-backend/server
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    volumes:
+      - './track-my-tracks-backend/server/src:/usr/src/app/src'
+      - './track-my-tracks-backend/server/package.json:/usr/src/app/package.json'
+      - './track-my-tracks-backend/server/tsconfig.json:/usr/src/app/tsconfig.json'
+    environment:
+      - DB_URL=postgres://admin:mypassword@db:5432/dev_db
+      - CLIENT_ID=
+      - CLIENT_SECRET=
+      - FRONTEND_URL=http://localhost:8080
+      - BACKEND_URL=http://localhost:3000
+      - JWT_SECRET=secret
+      - APP_USER_ADMIN=admin
+      - APP_USER_PASSPHRASE=admin
+    networks:
+      - backend
+
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: dev_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  worker:
+    depends_on:
+      - backend 
+      - db
+    build:
+      context: track-my-tracks-backend/worker
+      dockerfile: Dockerfile
+    environment:
+      - DB_URL=postgres://admin:mypassword@db:5432/dev_db
+      - CLIENT_ID=
+      - CLIENT_SECRET=
+    volumes:
+      - './track-my-tracks-backend/worker:/usr/src/app'
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  pgdata:

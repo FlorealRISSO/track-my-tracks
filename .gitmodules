@@ -1,0 +1,6 @@
+[submodule "track-my-tracks-backend"]
+	path = track-my-tracks-backend
+	url = https://github.com/FlorealRISSO/track-my-tracks-backend.git
+[submodule "track-my-tracks-frontend"]
+	path = track-my-tracks-frontend
+	url = https://github.com/FlorealRISSO/track-my-tracks-frontend.git
