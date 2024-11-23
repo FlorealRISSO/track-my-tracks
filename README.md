@@ -85,6 +85,7 @@ To build and run the entire application using Docker, follow these steps:
    ```bash
    git clone https://github.com/FlorealRISSO/track-my-tracks.git
    cd track-my-tracks
+   git submodule update --init --recursive
    ```
 
 2. **Build and run the application**:
